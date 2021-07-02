@@ -1,19 +1,14 @@
 import React from 'react';
-import list from "../list";
+import taskMainList from "../List/TaskMainList";
+import TaskItem from "./TaskItem";
+import { observer } from 'mobx-react';
 
 const TasksList = () => {
-    
-    
-    const data = list.map(element => <li>{element.title}</li>);
-
-    
+    const datalist = taskMainList.data.map((task) => <TaskItem task={task} tasktitle={task.title} taskId={task.id} />);
     return (
-        <div>
-            <ul>
-            {data}
-            </ul>
+        <div className="todo-list">
+            {datalist}
         </div>
     );
 };
-
-export default TasksList;
+export default observer(TasksList);

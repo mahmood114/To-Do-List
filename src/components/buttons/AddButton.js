@@ -3,7 +3,7 @@ import AddModal from "../modal/Modal";
 import { useState } from 'react';
 
 const AddButton = () => {
-    
+
     const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => setIsOpen(true);
@@ -11,12 +11,12 @@ const AddButton = () => {
 
     return (
         <div>
-            <button onClick={openModal}>Add new task</button>
-            <AddModal 
-                isOpen={isOpen} 
+            <button className="add-task" onClick={openModal}>Add new task</button>
+            <AddModal
+                isOpen={isOpen}
                 closeModal={closeModal}
 
-            /> 
+            />
         </div>
     );
 };
