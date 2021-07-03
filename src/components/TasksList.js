@@ -4,10 +4,28 @@ import TaskItem from "./TaskItem";
 import { observer } from 'mobx-react';
 
 const TasksList = () => {
-    const datalist = taskMainList.data.map((task) => <TaskItem task={task} tasktitle={task.title} taskId={task.id} />);
+    const dataList = taskMainList.data
+        .filter(task => !task.done)
+        .map((task) => <TaskItem task={task} />);
+
+    const doneTasks = taskMainList.data
+        .filter(task => task.done)
+        .map(task => <TaskItem task={task} />);
+
+    const viewCompleted = () => {
+        if (doneTasks.length !== 0)
+            return (
+                <div>
+                    <h1>Completed Tasks</h1>
+                    {doneTasks}
+                </div>
+            )
+    }
+    
     return (
         <div className="todo-list">
-            {datalist}
+            {dataList}
+            {viewCompleted()}
         </div>
     );
 };

@@ -10,15 +10,20 @@ class TaskMainList {
     }
 
     deleteTask = (taskId) => {
-        const updatedTask = this.data.filter((task) => task.id !== taskId);
-        this.data = updatedTask;
+        const updatedTasks = this.data.filter((task) => task.id !== taskId);
+        this.data = updatedTasks;
     }
 
     createTask = (newTask) => {
-        newTask.id = this.data[this.data.length - 1].id + 1;
+        newTask.id = this.data.length + 1;
         this.data.push(newTask);
+        console.log(newTask);
     };
 
+    completeTask = (taskId) => {
+        const task = this.data.find(task => task.id === taskId)
+        task.done = !task.done;
+    }
 
     // fetchList = async () => {
     //     try {
