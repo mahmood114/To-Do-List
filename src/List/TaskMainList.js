@@ -3,7 +3,7 @@ import axios from "axios";
 import data from "../Data";
 
 class TaskMainList {
-    data = data;
+    data = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -36,9 +36,8 @@ class TaskMainList {
     completeTask = async (taskId) => {
         try {
             const task = this.data.find(task => task.id === taskId)
+            await axios.put(`http://localhost:8000/tasks/${taskId}`, { "done": !task.done });
             task.done = !task.done;
-            const taskDone = task.done;
-            await axios.put(`http://localhost:8000/tasks/${taskId}`, { "done": taskDone });
         } catch (error) {
             console.log(error);
         }
@@ -47,7 +46,7 @@ class TaskMainList {
 
     fetchList = async () => {
         try {
-            const response = await axios.get("http://localhost:8000");
+            const response = await axios.get("http://localhost:8000/tasks");
             this.data = response.data;
             console.log(response.data);
 

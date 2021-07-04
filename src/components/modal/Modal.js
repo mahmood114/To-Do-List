@@ -30,7 +30,7 @@ const AddModal = (props) => {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Description</label>
-                    <textarea type="text" className="form-control" name="description" />
+                    <textarea type="text" className="form-control" name="description" onChange={handleChange} />
                 </div>
                 <button type="submit" className="todo-button">Add Task</button>
             </form>
