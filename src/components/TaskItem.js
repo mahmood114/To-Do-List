@@ -4,6 +4,7 @@ import { BiTaskStyled } from "./Styles";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import taskMainList from "../List/TaskMainList";
 
+
 const TaskItem = (props) => {
 
     const handleCompleteTask = () => {
@@ -22,17 +23,17 @@ const TaskItem = (props) => {
     }
 
     return (
-        <div className="todo-row">
+        <div className="todo-col">
             <div className="todo-container ">
-                <h3>{props.task.title}</h3>
                 <div className="icons">
                     {viewDoneButton()}
                     <DeleteButton taskId={props.task.id} />
+                    <h2>{props.task.title}</h2>
+                </div>
+                <div className="icons ">
+                    <p>{props.task.description}</p>
                 </div>
             </div>
-            {/* <div >
-                {props.task.description}
-            </div> */}
         </div>
     )
 }

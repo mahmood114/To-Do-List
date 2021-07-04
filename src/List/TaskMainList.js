@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-// import axios from "axios";
+import axios from "axios";
 import data from "../Data";
 
 class TaskMainList {
@@ -25,19 +25,19 @@ class TaskMainList {
         task.done = !task.done;
     }
 
-    // fetchList = async () => {
-    //     try {
-    //         const response = await axios.get("http://localhost:8000");
-    //         this.data = response.data;
-    //         console.log(response.data);
+    fetchList = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000");
+            this.data = response.data;
+            console.log(response.data);
 
-    //     } catch (error) {
-    //         console.error("Something didn't work")
-    //     }
-    // }
+        } catch (error) {
+            console.error("Something didn't work")
+        }
+    }
 }
 
 const taskMainList = new TaskMainList();
-// taskMainList.fetchList();
+taskMainList.fetchList();
 
 export default taskMainList;
