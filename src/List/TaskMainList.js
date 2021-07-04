@@ -9,20 +9,40 @@ class TaskMainList {
         makeAutoObservable(this);
     }
 
-    deleteTask = (taskId) => {
-        const updatedTasks = this.data.filter((task) => task.id !== taskId);
-        this.data = updatedTasks;
+    deleteTask = async (taskId) => {
+        try {
+            await axios.delete(`http://localhost:8000/tasks/${taskId}`);
+            const updatedTasks = this.data.filter((task) => task.id !== taskId);
+            this.data = updatedTasks;
+
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
-    createTask = (newTask) => {
-        newTask.id = this.data.length + 1;
-        this.data.push(newTask);
-        console.log(newTask);
+    createTask = async (newTask) => {
+        try {
+            await axios.post(`http://localhost:8000/tasks`, newTask);
+            newTask.id = this.data.length + 1;
+            this.data.push(newTask);
+            console.log(newTask);
+        } catch (error) {
+            console.log(error);
+        }
+
     };
 
-    completeTask = (taskId) => {
-        const task = this.data.find(task => task.id === taskId)
-        task.done = !task.done;
+    completeTask = async (taskId) => {
+        try {
+            const task = this.data.find(task => task.id === taskId)
+            task.done = !task.done;
+            const taskDone = task.done;
+            await axios.put(`http://localhost:8000/tasks/${taskId}`, { "done": taskDone });
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     fetchList = async () => {
